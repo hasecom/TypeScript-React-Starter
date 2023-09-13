@@ -1,13 +1,15 @@
 import react,{useState,Dispatch,SetStateAction } from 'react'
 import styled from "styled-components";
-
-
+import {getGridSizeAndLines} from "../utill/grid"
+import field from "../constants/field";
 //ScrollableElement
 export const ScrollListenerComponent:React.FC<{
-  setScrollPosition:Dispatch<SetStateAction<number>>
+  setScrollPosition:Dispatch<SetStateAction<number>>,
+  windowSizeArrayProp:number[]
 }> = (props)=> {
     const [scrollPosition, setScrollPosition] = useState(0);
-  
+    const [gridsize,col,row] = getGridSizeAndLines(props.windowSizeArrayProp);
+
     const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
       const element = e.currentTarget;
       const currentPosition = element.scrollTop;
@@ -19,22 +21,22 @@ export const ScrollListenerComponent:React.FC<{
     };
   
   return (
-      <SkeletonElement onScroll={handleScroll}>
-        <div>{scrollPosition}</div>
+      <SkeletonElement onScroll={handleScroll} skeltonheight={(field.length/col)*gridsize}>
+        <div></div>
       </SkeletonElement>
   );
 }
-
-const SkeletonElement = styled.div`
+type skeletonElement = {
+  skeltonheight?:number
+}
+const SkeletonElement = styled.div<skeletonElement>`
   position:relative;
   width:inherit;
   height:inherit;
   overflow:auto;
 & div {
   position:relative;
-  height:3000px;
-  background:red;
-  opacity:0.4;
+  height:${p=>p.skeltonheight}px;
   overflow:scroll;
 }
 `

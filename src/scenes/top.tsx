@@ -9,16 +9,15 @@ import {SkeletonComponent} from '../utill/skeleton'
 const Top: React.FC = () => {
 
 const [scrollPosition, setScrollPosition] = useState(0)
-console.log(scrollPosition);
 const useWindowSizeArray:number[] = useWindowSize();
-useStageState(useWindowSizeArray)
+const fieldAry:number[] = useStageState(useWindowSizeArray,scrollPosition)
 const [width,height]:number[] = useWindowSizeArray;
- 
+
   return (
 <div className="top">
 <SkeletonComponent setScrollPosition={setScrollPosition} windowSizeArrayProp={useWindowSizeArray} />
 <NoScrollElement screenwidth={width} screenheight={height}>
-  <GridComponent windowSizeArrayProp={useWindowSizeArray} />
+  <GridComponent fieldAry={fieldAry} windowSizeArrayProp={useWindowSizeArray} />
 </NoScrollElement>
 </div>
   )
