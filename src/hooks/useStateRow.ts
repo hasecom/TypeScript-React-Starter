@@ -1,12 +1,37 @@
 import {useEffect, useState} from 'react';
 
+//import {useStackState} from './useStackState'
+/*
+stateRow:イベントを実行する高さ(初期画面トップを起点とする)
+sign:上または下にスクロール(1が上、-1が下)
+range:stateRowを起点にsign方向へ範囲を指定
+eventType:実行するイベント(関数呼び出し)
+eventId:実行するイベントのID
+*/
+const test = ():void =>{
+  console.log("ag")
+}
+const stackData =  [
+  {
+  "stackId":1,
+  "stateRow":15,
+  "sign":-1,
+  "range":5,
+  "eventType":test,
+  "eventId":3
+}
+]
 const UseStateRow = ():[number,(sum:number)=>void] => {
   const [stateRow,setStateRow] = useState<number>(0);
   const [stateRowDiff, setStateRowDiff] = useState<number>(0);
-
   useEffect(()=>{
+    //stackのデータ監視（入る前のデータ）
+    //stack配列 push & pop
+    stackData.map((i)=>{
+      console.log(i)
+    })
     console.log(stateRowDiff)  
-  });
+  },[stateRow]);
   const handleStateRow = (sum:number):void => {    
     setStateRowDiff(stateRow - sum)
     setStateRow(sum);
