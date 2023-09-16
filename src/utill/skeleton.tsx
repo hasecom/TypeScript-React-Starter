@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {ScrollListenerComponent} from "../components/scrollListenerComponent";
 
 export const SkeletonComponent:React.FC<{
-  setScrollPosition:Dispatch<SetStateAction<number>>,
+  setScrollPosition:(e:React.UIEvent<HTMLDivElement>)=>void,
   windowSizeArrayProp:number[]
 }>= (props) => {
   const [width,height]= props.windowSizeArrayProp;

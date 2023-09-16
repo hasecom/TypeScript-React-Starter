@@ -1,11 +1,15 @@
 import {getGridSizeAndLines} from "../utill/grid"
 import field from "../constants/field";
-
+import UseStateRow from '../hooks/useStateRow'
 export const useStageState = (windowSizeArrayProp:number[],scrollPosition:number):number[]=> {
   const [gridsize,col,row] = getGridSizeAndLines(windowSizeArrayProp);
-  let stateRow = 0;
+
+const [stateRow,setStateRow] = UseStateRow();
 if(!(Number.isNaN(scrollPosition/gridsize)) && 0 < scrollPosition){
-  stateRow = Number((scrollPosition/gridsize).toFixed());
+  let sclTrgStateRow = Number((scrollPosition/gridsize).toFixed());
+  if(sclTrgStateRow !== stateRow){
+    setStateRow(Number((scrollPosition/gridsize).toFixed()));
+  }
 }
 const fieldAry = [...field].map((i) => i).slice(0+(col*stateRow),col*(row+(col*stateRow)));
 return fieldAry;
