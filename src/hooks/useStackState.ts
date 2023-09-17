@@ -9,13 +9,15 @@ type useStackStateType = {
   eventId:number
 }
 
-const UseStackState= (stackObject:useStackStateType):[
+export const UseStackState= ():[
   useStackStateType[],
   (stackObject:useStackStateType)=>void
 ] => {
+
   const [stackState,setStackState] = useState<useStackStateType[]>([]); 
   const handleStackState = (stackObject:useStackStateType):void => {
     setStackState([...stackState,stackObject]);
   }
+
   return [stackState,handleStackState]
 }

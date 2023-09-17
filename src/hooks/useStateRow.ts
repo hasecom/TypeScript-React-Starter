@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 
-//import {useStackState} from './useStackState'
+import {UseStackState} from './useStackState'
 /*
 stateRow:イベントを実行する高さ(初期画面トップを起点とする)
 sign:上または下にスクロール(1が上、-1が下)
@@ -24,13 +24,35 @@ const stackData =  [
 const UseStateRow = ():[number,(sum:number)=>void] => {
   const [stateRow,setStateRow] = useState<number>(0);
   const [stateRowDiff, setStateRowDiff] = useState<number>(0);
+  const [stackState,handleStackState] = UseStackState();
   useEffect(()=>{
+    console.log(stackState);
     //stackのデータ監視（入る前のデータ）
     //stack配列 push & pop
     stackData.map((i)=>{
-      console.log(i)
+      const beginOfRange = i.stateRow;
+      const endOfRange = i.stateRow + i.range;
+      if(//下にスクロール中にstareRowに一致する下スクロールイベント
+        beginOfRange == stateRow && 
+        stateRowDiff <= -1 &&
+        i.sign <= -1
+        ){
+        handleStackState(i);
+       }else if(//上にスクロール中にstareRowに一致する下スクロールイベント
+        beginOfRange == stateRow && 
+        stateRowDiff >= 1 &&
+        i.sign >= 1      
+       )
+
+     if(stateRowDiff < 1){//下方向
+
+      //console.log("した")
+     }else{
+
+     }
+
     })
-    console.log(stateRowDiff)  
+  //  console.log(stateRowDiff)  
   },[stateRow]);
   const handleStateRow = (sum:number):void => {    
     setStateRowDiff(stateRow - sum)
