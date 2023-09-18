@@ -11,6 +11,7 @@ type useStackStateType = {
 
 export const UseStackState= ():[
   useStackStateType[],
+  (stackObject:useStackStateType)=>void,
   (stackObject:useStackStateType)=>void
 ] => {
 
@@ -18,6 +19,10 @@ export const UseStackState= ():[
   const handleStackState = (stackObject:useStackStateType):void => {
     setStackState([...stackState,stackObject]);
   }
+  const handleStackObjectDelete = (stackObject:useStackStateType):void => {
+    const filteredStackState = stackState.filter(i => i.stackId !== stackObject.stackId);
+    setStackState(filteredStackState);
+  }
 
-  return [stackState,handleStackState]
+  return [stackState,handleStackState,handleStackObjectDelete]
 }
