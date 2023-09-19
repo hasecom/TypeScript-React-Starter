@@ -3,8 +3,7 @@ import field from "../constants/field";
 import UseStateRow from '../hooks/useStateRow'
 export const useStageState = (windowSizeArrayProp:number[],scrollPosition:number):number[]=> {
   const [gridsize,col,row] = getGridSizeAndLines(windowSizeArrayProp);
-
-const [stateRow,setStateRow] = UseStateRow();
+  const [stateRow,setStateRow] = UseStateRow();
 if(!(Number.isNaN(scrollPosition/gridsize)) && 0 <= scrollPosition){
   let sclTrgStateRow = Number((scrollPosition/gridsize).toFixed());
   if(sclTrgStateRow !== stateRow){
