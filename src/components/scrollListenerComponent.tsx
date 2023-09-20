@@ -2,27 +2,7 @@ import react,{useState,Dispatch,SetStateAction } from 'react'
 import styled from "styled-components";
 import {getGridSizeAndLines} from "../utill/grid"
 import field from "../constants/field";
-import {sortStackDataRow} from "../constants/stackData"
-
-const stackDataRow = ():number => {
-  let stackRowGridCount = 0;
-  let stateNextRow = 0;
-  (sortStackDataRow()).map((i)=>{
-    if(i.fixedField === 1 ){
-      if(i.stateRow < stateNextRow){
-        let diff = i.range - (stateNextRow - i.stateRow);
-        if(0 < diff){
-          stackRowGridCount += diff;
-          stateNextRow = i.stateRow + i.range;
-        }
-      }else{
-        stackRowGridCount += i.range;
-        stateNextRow = i.stateRow + i.range;
-      }
-    }
-  });
-  return stackRowGridCount;
-}
+import stackDataRow from "../utill/stackDataRow"
 
 export const ScrollListenerComponent:React.FC<{
   setScrollPosition:(e:React.UIEvent<HTMLDivElement>)=>void,

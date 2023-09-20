@@ -1,18 +1,10 @@
 import react,{useState} from 'react';
-
-type useStackStateType = {
-  stackId:number,
-  stateRow:number,
-  sign:number,
-  range:number,
-  eventType:()=>void,
-  eventId:number
-}
+import {useStackStateType} from '../constants/stackData'
 
 export const UseStackState= ():[
   useStackStateType[],
   (stackObject:useStackStateType)=>void,
-  (stackObject:useStackStateType)=>void
+  (stackObject:useStackStateType)=>void,
 ] => {
 
   const [stackState,setStackState] = useState<useStackStateType[]>([]); 

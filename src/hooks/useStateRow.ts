@@ -1,12 +1,13 @@
 import {useEffect, useState} from 'react';
+import {stackData,useStackStateType} from '../constants/stackData'
 
-import {UseStackState} from './useStackState'
-import {stackData} from '../constants/stackData'
-
-const UseStateRow = ():[number,(sum:number)=>void] => {
+const UseStateRow = (
+  stackState:useStackStateType[],
+  handleStackState:(stackObject:useStackStateType)=>void,
+  handleStackObjectDelete:(stackObject:useStackStateType)=>void
+):[number,(sum:number)=>void] => {
   const [stateRow,setStateRow] = useState<number>(0);
   const [stateRowDiff, setStateRowDiff] = useState<number>(0);
-  const [stackState,handleStackState,handleStackObjectDelete] = UseStackState();
   useEffect(()=>{
     //stackのデータ監視（入る前のデータ）
     //stack配列 push & pop

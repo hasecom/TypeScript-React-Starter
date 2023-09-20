@@ -6,7 +6,7 @@ fixedField:フィールドを固定するか(0しない,１固定)
 eventType:実行するイベント(関数呼び出し)
 eventId:実行するイベントのID
 */
-type useStackStateType = {
+export type useStackStateType = {
   stackId:number,
   stateRow:number,
   sign:number,
