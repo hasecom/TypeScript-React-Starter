@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import {getGridSizeAndLines} from "../utill/grid"
 import field from "../constants/field";
+import {stackData} from '../constants/stackData'
 import UseStateRow from '../hooks/useStateRow'
 import stackDataRow from '../utill/stackDataRow'
 import { UsePlayerState} from '../hooks/usePlayerState';
@@ -16,6 +17,11 @@ export const useStageState = (windowSizeArrayProp:number[],scrollPosition:number
     }
   }
   useEffect(()=>{
+    stackData.map((i)=>{
+      if(i.stateRow === stateRow){
+        i.event();
+      }
+    })
     handlePlayerState();
   },[stateRow])
 //stateRowとは別のフィールドステータスを追加する。
