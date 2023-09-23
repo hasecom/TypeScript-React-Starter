@@ -30,4 +30,5 @@ export const player_work_right = [
 
 export const player_default_work = (arg:number):void =>{
   fieldObject[playerIndex] = arg;
+  console.log(arg);
 }

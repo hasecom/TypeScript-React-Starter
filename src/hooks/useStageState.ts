@@ -2,14 +2,12 @@ import { useEffect } from "react";
 import {getGridSizeAndLines} from "../utill/grid"
 import field from "../constants/field";
 import UseStateRow from '../hooks/useStateRow'
-import {UseStackState} from './useStackState'
 import stackDataRow from '../utill/stackDataRow'
 import { UsePlayerState} from '../hooks/usePlayerState';
 
 export const useStageState = (windowSizeArrayProp:number[],scrollPosition:number):number[]=> {
-  const [stackState,handleStackState,handleStackObjectDelete] = UseStackState();
   const [gridsize,col,row] = getGridSizeAndLines(windowSizeArrayProp);
-  const [stateRow,setStateRow] = UseStateRow(stackState,handleStackState,handleStackObjectDelete);
+  const [stateRow,setStateRow] = UseStateRow();
   const [usePlayerState,handlePlayerState] = UsePlayerState();
   if(!(Number.isNaN(scrollPosition/gridsize)) && 0 <= scrollPosition){
     let sclTrgStateRow = Number((scrollPosition/gridsize).toFixed());
@@ -18,7 +16,7 @@ export const useStageState = (windowSizeArrayProp:number[],scrollPosition:number
     }
   }
   useEffect(()=>{
-    handlePlayerState(usePlayerState);
+    handlePlayerState();
   },[stateRow])
 //stateRowとは別のフィールドステータスを追加する。
 //スタック配列を確認し分岐処理

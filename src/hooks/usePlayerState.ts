@@ -12,16 +12,13 @@ export const UsePlayerState = (arg?:number):[
   handlePlayerState:(arg?:number)=>void
 ] =>{
   const [usePlayerState,SetUsePlayerState] = useState<number>(1);
-  const handlePlayerState = (arg?:number):void => {
-    if(arg !== null){
+  const handlePlayerState = ():void => {
       const nextValAry = player_work_front;
       nextValAry.map((i)=>{
         if(i.val === usePlayerState){
           SetUsePlayerState(i.nextVal);
         }
-      });
-    }else{
-    }
+      });               
   }
   useEffect(()=>{
     player_default_work(usePlayerState);
