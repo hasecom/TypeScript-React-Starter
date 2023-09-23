@@ -1,3 +1,4 @@
+import {player_direction_left} from '../utill/stackDataFnc'
 /*
 stateRow:イベントを実行する高さ(初期画面トップを起点とする)
 sign:上または下にスクロール(1が上、-1が下)
@@ -14,7 +15,9 @@ export type useStackStateType = {
   eventType:()=>void,
   eventId:number
 }
-const test = ()=>{}
+const test = ():void=>{
+console.log("ff")
+}
 
 export const sortStackDataRow = ():useStackStateType[] =>{
   const sortStack = stackData;
@@ -23,7 +26,7 @@ export const sortStackDataRow = ():useStackStateType[] =>{
 } 
 
 export const stackData:useStackStateType[] = [
-  {"stackId":1,"stateRow":15,"sign":-1,"fixedField":1,"eventType":test,"eventId":3},
+  {"stackId":1,"stateRow":15,"sign":-1,"fixedField":1,"eventType":player_direction_left,"eventId":3},
   {"stackId":2,"stateRow":13,"sign":-1,"fixedField":1,"eventType":test,"eventId":4},
   {"stackId":3,"stateRow":12,"sign":-1,"fixedField":1,"eventType":test,"eventId":3},
   {"stackId":4,"stateRow":11,"sign":-1,"fixedField":1,"eventType":test,"eventId":3},

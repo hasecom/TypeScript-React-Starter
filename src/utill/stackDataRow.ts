@@ -5,7 +5,7 @@ const stackDataRow = (
 ):number => {
   let stackRowGridCount = 0;
   if(stateRow !== undefined){
-    stackRowGridCount = (sortStackDataRow()).filter(k => k.stateRow < stateRow).length;
+    stackRowGridCount = (sortStackDataRow()).filter(k => k.stateRow < stateRow && k.fixedField === 1).length;
   }else{
     stackRowGridCount = ((sortStackDataRow()).filter(k => k.fixedField  === 1)).length;
   }

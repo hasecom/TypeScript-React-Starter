@@ -1,4 +1,4 @@
-import react,{useState} from 'react';
+import react,{useEffect, useState} from 'react';
 import {useStackStateType} from '../constants/stackData'
 
 export const UseStackState= ():[
@@ -13,8 +13,16 @@ export const UseStackState= ():[
   }
   const handleStackObjectDelete = (stackObject:useStackStateType):void => {
     const filteredStackState = stackState.filter(i => i.stackId !== stackObject.stackId);
+    console.log(filteredStackState)
     setStackState(filteredStackState);
   }
+  useEffect(()=>{
+    console.log(stackState)
+    stackState.map(j=>{
+      
+     // j.eventType()
+    })
+  },[stackState])
 
   return [stackState,handleStackState,handleStackObjectDelete]
 }
