@@ -2,7 +2,8 @@ import {useState} from 'react';
 import {
   player_default_work,
   player_work_init,
-  field_moves_right_call
+  field_moves_right_call,
+  field_moves_left_call
 
 } from './fieldObjectFnc';
 export const player_direction_left = ():void => {
@@ -19,4 +20,7 @@ export const player_direction_back = ():void => {
 }
 export const field_moves_right = ():void => {
   field_moves_right_call();
+}
+export const field_moves_left = ():void => {
+  field_moves_left_call();
 }

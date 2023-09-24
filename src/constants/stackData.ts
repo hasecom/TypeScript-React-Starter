@@ -2,7 +2,8 @@ import {
   player_direction_left,
   player_direction_right,
   player_direction_front,
-  field_moves_right
+  field_moves_right,
+  field_moves_left
 } from '../utill/stackDataFnc'
 /*
 stateRow:イベントを実行する高さ(初期画面トップを起点とする)
@@ -31,7 +32,6 @@ export const sortStackDataRow = ():useStackStateType[] =>{
 export const stackData:useStackStateType[] = [
   //プレイヤー：右向き
   {"stackId":1,"stateRow":12,"sign":-1,"fixedField":1,"event":player_direction_right,"eventId":3},
-  {"stackId":10,"stateRow":11,"sign":-1,"fixedField":1,"event":player_direction_right,"eventId":3},
   //プレイヤー：移動 x + 1
   {"stackId":2,"stateRow":13,"sign":-1,"fixedField":1,"event":field_moves_right,"eventId":4},
   {"stackId":3,"stateRow":14,"sign":-1,"fixedField":1,"event":field_moves_right,"eventId":4},
@@ -42,6 +42,13 @@ export const stackData:useStackStateType[] = [
   {"stackId":8,"stateRow":19,"sign":-1,"fixedField":1,"event":field_moves_right,"eventId":4},
   {"stackId":9,"stateRow":20,"sign":-1,"fixedField":1,"event":field_moves_right,"eventId":4},
   //プレイヤー：下向き
-  {"stackId":11,"stateRow":21,"sign":-1,"fixedField":1,"event":player_direction_front,"eventId":3},
-  {"stackId":12,"stateRow":22,"sign":-1,"fixedField":1,"event":player_direction_front,"eventId":3},
+  {"stackId":10,"stateRow":21,"sign":-1,"fixedField":1,"event":player_direction_front,"eventId":3},
+  //プレイヤー：左向き
+  {"stackId":11,"stateRow":23,"sign":-1,"fixedField":1,"event":player_direction_left,"eventId":3},
+   //プレイヤー：移動 x -1 1
+  {"stackId":12,"stateRow":24,"sign":-1,"fixedField":1,"event":field_moves_left,"eventId":4},
+  {"stackId":13,"stateRow":25,"sign":-1,"fixedField":1,"event":field_moves_left,"eventId":4},
+  {"stackId":14,"stateRow":26,"sign":-1,"fixedField":1,"event":field_moves_left,"eventId":4},
+  {"stackId":15,"stateRow":27,"sign":-1,"fixedField":1,"event":field_moves_left,"eventId":4},
+  {"stackId":16,"stateRow":28,"sign":-1,"fixedField":1,"event":field_moves_left,"eventId":4},
 ]
