@@ -1,7 +1,8 @@
 import fieldObject from "../constants/fieldObject";
-import field,{RightField} from '../constants/field';
+import field,{RightField,TempField} from '../constants/field';
 const player_range = [1,2,3,4,5,6,7,8,9,10,11,12];
-const field_col = 12;
+const field_col:number = 12;
+let rightShift = 0;
 export let playerIndex = fieldObject.findIndex((i) => player_range.includes(i));
 export type player_work_type ={
   val:number,
@@ -38,14 +39,23 @@ export const player_default_work = (arg:number):void =>{
   fieldObject[playerIndex] = arg;
 }
 export const field_moves_right_call = ():void => {
+  rightShift++;
   //一番左をtemp配列
   //配列1列から、12列を右にシフト(11回)
   //1<= n < 12の範囲で、行数t(0<= t length/12)とし nをt*(n-1)でt*12の和 これを11回繰り返す。（コピー上書き）
   for(let n=0;n<field_col;n++){
-    for(let t=0; t< ((field.length)/field_col);t++){
-      console.log(field[n+(t*field_col)])
+    for(let t=0; t<((field.length)/field_col);t++){
+        //tempField配列を左にシフト
+        TempField[field_col*t+field_col-2]=TempField[field_col*t+field_col-1];
+        //tempField配列の右端に、field配列の左端をシフト
+        TempField[field_col*t+field_col-1]=field[n+(t*field_col)];
+        //field配列の特定の列を左にシフト
+        if(n!==0){
+          field[(n-1)+t*(field_col)] = field[(n)+t*(field_col)];
+        }   
     }
   }
-  //12列目を右フィールド配列から追加するものとする。
-  //field = 2;
+    for(let t=0; t<((field.length)/field_col);t++){
+        field[(field_col-1)+(t*field_col)]=RightField[(field_col*t)+rightShift];
+    }
 }
