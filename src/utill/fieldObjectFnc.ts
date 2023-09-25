@@ -40,18 +40,17 @@ export const player_default_work = (arg: number): void => {
   fieldObject[playerIndex] = arg;
 }
 export const field_moves_right_call = (): void => {
-
   //一番左をtemp配列
   //配列1列から、12列を右にシフト(11回)
   //1<= n < 12の範囲で、行数t(0<= t length/12)とし nをt*(n-1)でt*12の和 これを11回繰り返す。（コピー上書き）
   for (let n = 0; n < field_col; n++) {
     for (let t = 0; t < ((field.length) / field_col); t++) {
-      //tempField配列を左にシフト
-      TempField[field_col * t + field_col - 2] = TempField[field_col * t + field_col - 1];
-      //tempField配列の右端に、field配列の左端をシフト
-      TempField[field_col * t + field_col - 1] = field[n + (t * field_col)];
-      //field配列の特定の列を左にシフト
-      if (n !== 0) {
+     if (n !== 0) {
+        //tempField配列を左にシフト
+        TempField[(n - 1) + t * (field_col)] = TempField[(n) + t * (field_col)];
+        //tempField配列の右端に、field配列の左端をシフト
+        TempField[field_col * t + field_col - 1] = field[n + (t * field_col)];
+        //field配列の特定の列を左にシフト
         field[(n - 1) + t * (field_col)] = field[(n) + t * (field_col)];
       }
     }
@@ -62,22 +61,26 @@ export const field_moves_right_call = (): void => {
   rightShift++;
 }
 export const field_moves_left_call = (): void => {
+
+for (let n = 0; n < field_col; n++) {
+  for (let t = 0; t < ((field.length) / field_col); t++) {
+    if(n !==0){
+      //tempField配列を左にシフト
+      TempField[(field_col - n) + t * (field_col)] = TempField[(field_col - n - 1) + t * (field_col)];
+    }
+  }}
+
   for (let n = 0; n < field_col; n++) {
     for (let t = 0; t < ((field.length) / field_col); t++) {
-      //tempField配列を左にシフト
-      TempField[field_col * t + field_col - 2] = TempField[field_col * t + field_col - 1];
-      if (n === 0) {
-        TempField[t * field_col + 1] = TempField[field_col * t];
-      }
-      //tempField配列の左端に、field配列の右端をシフト
-      TempField[field_col * t] = field[(field_col * t + field_col - 1)];
-      //field配列の特定の列を右にシフト
-      if (n !== 0) {
+      if (n === 0) {  
+        //tempField配列の左端に、field配列の右端をシフト
+        TempField[field_col * t] = field[(field_col * t + field_col - 1)];
+      }else{
+        //field配列の特定の列を右にシフト
         field[(field_col - n) + t * (field_col)] = field[(field_col - n - 1) + t * (field_col)];
       }
     }
   }
-
   //メイン配列の左端に左配列のn列目のデータを代入
   for (let t = 0; t < ((field.length) / field_col); t++) {
     field[t*field_col]=LeftField[(field_col*t)+leftShift];
