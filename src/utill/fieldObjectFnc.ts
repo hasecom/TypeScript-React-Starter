@@ -2,8 +2,9 @@ import fieldObject from "../constants/fieldObject";
 import field, { RightField, LeftField, TempField } from '../constants/field';
 const player_range = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 const field_col: number = 12;
-let rightShift = 1;
-let leftShift = 1;
+let rightShift = 0;
+let leftShift = 0;
+
 export let playerIndex = fieldObject.findIndex((i) => player_range.includes(i));
 export type player_work_type = {
   val: number,
@@ -40,6 +41,7 @@ export const player_default_work = (arg: number): void => {
   fieldObject[playerIndex] = arg;
 }
 export const field_moves_right_call = (): void => {
+
   //一番左をtemp配列
   //配列1列から、12列を右にシフト(11回)
   //1<= n < 12の範囲で、行数t(0<= t length/12)とし nをt*(n-1)でt*12の和 これを11回繰り返す。（コピー上書き）
@@ -56,22 +58,23 @@ export const field_moves_right_call = (): void => {
     }
   }
   for (let t = 0; t < ((field.length) / field_col); t++) {
-    field[(field_col - 1) + (t * field_col)] = RightField[(field_col * t) + rightShift];
+      field[(field_col - 1) + (t * field_col)] = RightField[(field_col * t) + rightShift];
   }
-  rightShift++;
+    rightShift++;
 }
-export const field_moves_left_call = (): void => {
 
-for (let n = 0; n < field_col; n++) {
-  for (let t = 0; t < ((field.length) / field_col); t++) {
-    if(n !==0){
-      //tempField配列を左にシフト
-      TempField[(field_col - n) + t * (field_col)] = TempField[(field_col - n - 1) + t * (field_col)];
-    }
-  }}
+export const field_moves_left_call = (): void => {
 
   for (let n = 0; n < field_col; n++) {
     for (let t = 0; t < ((field.length) / field_col); t++) {
+      if(n !==0){
+          //tempField配列を左にシフト
+          TempField[(field_col - n) + t * (field_col)] = TempField[(field_col - n - 1) + t * (field_col)];
+      }
+    }}
+  for (let n = 0; n < field_col; n++) {
+    for (let t = 0; t < ((field.length) / field_col); t++) {
+     // if (n === 0 && Temp_exists((field_col - n) + t * (field_col))) {  
       if (n === 0) {  
         //tempField配列の左端に、field配列の右端をシフト
         TempField[field_col * t] = field[(field_col * t + field_col - 1)];
@@ -83,7 +86,12 @@ for (let n = 0; n < field_col; n++) {
   }
   //メイン配列の左端に左配列のn列目のデータを代入
   for (let t = 0; t < ((field.length) / field_col); t++) {
-    field[t*field_col]=LeftField[(field_col*t)+leftShift];
+//------------------temp右づめでいれていく
+      field[t*field_col]=LeftField[(field_col*t)+leftShift];
   }
-  leftShift++;
+  console.log(TempField)
+
+}
+const Temp_exists = (key:number):boolean => {
+  return TempField[key] !== -1 ? true : false; 
 }
